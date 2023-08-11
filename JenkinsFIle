@@ -6,11 +6,11 @@ pipeline {
         // }
     
     stages{
-        stage(
+        stage('git checkout'){
             steps{
                 sh "echo passwd"
                 git 'https://github.com/maroof16/argo.git'
             }
-        )
+        }
     }
 }
