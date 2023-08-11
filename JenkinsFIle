@@ -9,7 +9,7 @@ pipeline {
         stage{
             steps{
                 sh "echo passwd"
-                git 'https://github.com/maroof16/argo/tree/master'
+                git 'https://github.com/maroof16/argo'
             }
         }
     }
