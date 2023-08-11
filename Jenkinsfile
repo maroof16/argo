@@ -1,9 +1,9 @@
 pipeline {
-    agent any
-        // docker {
-        //     image 'maroofshaikh09/docker-agent:latest'
-        //      args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        // }
+    agent
+        docker {
+            image 'maroofshaikh09/docker-agent:latest'
+             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+        }
     
     stages{
         stage('git checkout'){
