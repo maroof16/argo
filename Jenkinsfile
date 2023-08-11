@@ -1,15 +1,27 @@
+// pipeline {
+//     agent {
+//         docker {
+//             image 'maroofshaikh09/docker-agent:latest'
+//             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+//         }
+//     }
+//     stages {
+//         stage('git checkout') {
+//             steps {
+//                 sh "echo passwd"
+//                 sh "git clone https://github.com/maroof16/argo.git"
+//             }
+//         }
+//     }
+// }
 pipeline {
     agent {
-        docker {
-            image 'maroofshaikh09/docker-agent:latest'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
+        docker { image 'node:18.17.1-alpine3.18' }
     }
     stages {
-        stage('git checkout') {
+        stage('Test') {
             steps {
-                sh "echo passwd"
-                sh "git clone https://github.com/maroof16/argo.git"
+                sh 'node --version'
             }
         }
     }
