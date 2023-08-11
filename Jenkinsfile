@@ -1,9 +1,9 @@
 pipeline {
     agent {
-        label 'docker-slave' {
-            image 'maroofshaikh09/docker-agent:latest'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
+        label 'docker-slave'
+          //  image 'maroofshaikh09/docker-agent:latest'
+            //args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+        
     }
     stages{
         stage('git checkout'){
