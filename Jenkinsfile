@@ -14,12 +14,33 @@
 //         }
 //     }
 // }
+// pipeline {
+//     agent {
+//         docker { image 'node:18.17.1-alpine3.18' }
+//     }
+//     stages {
+//         stage('Test') {
+//             steps {
+//                 sh 'node --version'
+//             }
+//         }
+//     }
+// }
 pipeline {
-    agent {
-        docker { image 'node:18.17.1-alpine3.18' }
-    }
+    agent none
     stages {
-        stage('Test') {
+        stage('Back-end') {
+            agent {
+                docker { image 'maven:3.9.3-eclipse-temurin-17-alpine' }
+            }
+            steps {
+                sh 'mvn --version'
+            }
+        }
+        stage('Front-end') {
+            agent {
+                docker { image 'node:18.17.1-alpine3.18' }
+            }
             steps {
                 sh 'node --version'
             }
