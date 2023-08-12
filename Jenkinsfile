@@ -18,10 +18,8 @@ pipeline {
         }
         stage ("static code analysis") {
             steps {
-                script {
-                    withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
-                        sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url= http://13.233.90.94:9000'
-                    }
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
+                    sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url= http://13.233.90.94:9000'
                 }
             }
         }
