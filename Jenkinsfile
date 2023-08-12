@@ -17,6 +17,7 @@ pipeline {
         // }
         stage('git checkout') {
             steps {
+                sh 'sudo rm -rf *'
                 sh "git clone https://github.com/maroof16/argo.git"
             }
         }
