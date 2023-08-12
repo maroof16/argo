@@ -28,10 +28,8 @@ pipeline {
         stage ("static code analysis") {
             steps {
                 script {
-                    withSonarQubeEnv('sonarqube') {
-                        sh "${SCANNER_HOME}/bin/sonar-scanner "
-                        sh 'sonar-scanner -Dsonar.projectKey=my-project-key'
-                    }
+                    def scannerCmd = "${SCANNER_HOME}/bin/sonar-scanner"
+                    sh "${scannerCmd}"
                 }
             }
         }
