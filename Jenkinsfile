@@ -17,7 +17,6 @@ pipeline {
         // }
         stage('git checkout') {
             steps {
-                sh "echo passwd"
                 sh "git clone https://github.com/maroof16/argo.git"
             }
         }
