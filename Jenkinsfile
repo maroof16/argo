@@ -1,12 +1,12 @@
 pipeline {
-        agent {
-            docker {
-                image 'maroofshaikh09/agent:latest'
-                args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-            }
+    agent {
+        docker {
+            image 'maroofshaikh09/agent:latest'
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
-      environment {
-        SCANNER_HOME = tool 'sonar-scanner'
+    }
+    environment {
+    SCANNER_HOME = tool 'sonar-scanner'
     }
     stages {
         stage('git checkout') {
