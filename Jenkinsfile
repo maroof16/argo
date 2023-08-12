@@ -30,8 +30,9 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('sonarqube') {
-                        sh "${SCANNER_HOME}/bin/sonar-scanner "
-                        sh 'sonar-scanner -Dsonar.projectKey=my-project-key'
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Argo \
+                           -Dsonar.java.binaries=. \
+                           -Dsonar.projectKey=Argo '''
                     }
                 }
             }
