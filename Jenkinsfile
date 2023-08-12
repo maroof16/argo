@@ -22,12 +22,12 @@ pipeline {
         stage ("static code analysis") {
             steps {
                 script {
-                    //withSonarQubeEnv('sonarqube') {
-                    withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
-                        sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host= sonarqube'
-                        // sh ''' sonar-scanner/bin/sonar-scanner -Dsonar.projectName=Argo \
-                        //    -Dsonar.java.binaries=. \
-                        //    -Dsonar.projectKey=Argo '''
+                    // withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
+                        // sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host= sonarqube'
+                    withSonarQubeEnv('sonarqube') {
+                        sh ''' sonar-scanner/bin/sonar-scanner -Dsonar.projectName=Argo \
+                           -Dsonar.java.binaries=. \
+                           -Dsonar.projectKey=Argo '''
                     }
                 }
             }
