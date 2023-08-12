@@ -5,9 +5,12 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-    environment {
-    SCANNER_HOME = tool 'sonar-scanner'
+    tools {
+        SonarQube Scanner 'sonar-scanner'
     }
+    // environment {
+    // SCANNER_HOME = tool 'sonar-scanner'
+    // }
     stages {
         stage('git checkout') {
             steps {
@@ -23,7 +26,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('sonarqube') {
-                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Argo \
+                        sh ''' sonar-scanner/bin/sonar-scanner -Dsonar.projectName=Argo \
                            -Dsonar.java.binaries=. \
                            -Dsonar.projectKey=Argo '''
                     }
