@@ -10,11 +10,11 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
     }
     stages {
-        // stage('Clean Workspace') {
-        //     steps {
-        //         sh 'rm -rf argo' // Clean the directory if it exists
-        //     }
-        // }
+        stage('Clean Workspace') {
+            steps {
+                sh 'sudo rm -rf argo' // Clean the directory if it exists
+            }
+        }
         stage('git checkout') {
             steps {
                 sh "echo passwd"
