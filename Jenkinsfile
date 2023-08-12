@@ -22,10 +22,10 @@ pipeline {
         stage ("static code analysis") {
             steps {
                 script {
-                    // withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
+                    withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
                         // sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host= sonarqube'
-                    withSonarQubeEnv('sonarqube') {
-                        sh ''' sonar-scanner/bin/sonar-scanner -Dsonar.projectName=Argo \
+                    // withSonarQubeEnv('sonarqube') {
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Argo \
                            -Dsonar.java.binaries=. \
                            -Dsonar.projectKey=Argo '''
                     }
