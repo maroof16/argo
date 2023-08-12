@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     //withSonarQubeEnv('sonarqube') {
-                        withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')])
+                    withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
                         sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url=http://65.2.184.70:9000'
                         // sh ''' sonar-scanner/bin/sonar-scanner -Dsonar.projectName=Argo \
                         //    -Dsonar.java.binaries=. \
