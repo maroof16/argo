@@ -27,9 +27,11 @@ pipeline {
         }
         stage ("static code analysis") {
             steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh "${SCANNER_HOME}/bin/sonar-scanner "
-                    sh 'sonar-scanner -Dsonar.projectKey=my-project-key'
+                script {
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${SCANNER_HOME}/bin/sonar-scanner "
+                        sh 'sonar-scanner -Dsonar.projectKey=my-project-key'
+                    }
                 }
             }
         }
