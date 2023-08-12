@@ -25,9 +25,10 @@ pipeline {
                     withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
                         // sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host= sonarqube'
                     // withSonarQubeEnv('sonarqube') {
-                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Argo \
-                           -Dsonar.java.binaries=. \
-                           -Dsonar.projectKey=Argo '''
+                        // sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Argo \
+                        //    -Dsonar.java.binaries=. \
+                        //    -Dsonar.projectKey=Argo '''
+                        sh ' mvn sonar:sonar '
                     }
                 }
             }
