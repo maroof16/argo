@@ -6,6 +6,11 @@ pipeline {
         }
     }
     stages {
+        stage('Clean Workspace') {
+            steps {
+                sh 'rm -rf argo' // Clean the directory if it exists
+            }
+        }
         stage('git checkout') {
             steps {
                 sh "echo passwd"
