@@ -5,6 +5,9 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
+    environment {
+        sonarqube_url = "http://13.233.69.215:9000"
+    }
     stages {
         stage('Clean Workspace') {
             steps {
@@ -20,6 +23,13 @@ pipeline {
         stage("Build and test") {
             steps{
                 sh 'mvn clean package'
+            }
+        }
+        stage ("static code analysis") {
+            steps {
+                withSonarQubeEnv(credentialsId: 'sonar-token') {
+                sh'mvn sonar:sonar -Dsonarlogin=$sonar-token -Dsonar.host.url=${sonarqube_url}'
+                }
             }
         }
     }
