@@ -29,8 +29,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner "
-                    sh "mvn sonar:sonar"
-
+                    sh 'sonar-scanner -Dsonar.projectKey=my-project-key'
                 }
             }
         }
