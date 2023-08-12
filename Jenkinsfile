@@ -6,7 +6,7 @@ pipeline {
         }
     }
     tools {
-        SonarQube Scanner 'sonar-scanner'
+        SonarQube-Scanner 'sonar-scanner'
     }
     // environment {
     // SCANNER_HOME = tool 'sonar-scanner'
