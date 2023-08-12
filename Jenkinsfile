@@ -1,10 +1,11 @@
 pipeline {
-    agent {
-        docker{
-            image 'maroofshaikh09/agent:latest'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
+    // agent {
+    //     docker{
+    //         image 'maroofshaikh09/agent:latest'
+    //         args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+    //     }
+    // }
       environment {
         SCANNER_HOME = tool 'sonar-scanner'
     }
@@ -28,8 +29,10 @@ pipeline {
         stage ("static code analysis") {
             steps {
                 script {
-                    def scannerCmd = "${SCANNER_HOME}/bin/sonar-scanner"
-                    sh "${scannerCmd}"
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${SCANNER_HOME}/bin/sonar-scanner "
+                        sh 'sonar-scanner -Dsonar.projectKey=my-project-key'
+                    }
                 }
             }
         }
