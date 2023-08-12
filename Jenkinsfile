@@ -5,12 +5,9 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-    tools {
-        SonarQube-Scanner 'sonar-scanner'
+    environment {
+    SCANNER_HOME = tool 'sonar-scanner'
     }
-    // environment {
-    // SCANNER_HOME = tool 'sonar-scanner'
-    // }
     stages {
         stage('git checkout') {
             steps {
