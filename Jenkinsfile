@@ -5,9 +5,6 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-    environment {
-    SCANNER_HOME = tool 'sonar-scanner'
-    }
     stages {
         stage('git checkout') {
             steps {
@@ -24,11 +21,6 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
                         sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url= http://13.233.90.94:9000'
-                    // withSonarQubeEnv('sonarqube') {
-                        // sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Argo \
-                        //    -Dsonar.java.binaries=. \
-                        //    -Dsonar.projectKey=Argo '''
-                        // sh ' mvn sonar:sonar '
                     }
                 }
             }
