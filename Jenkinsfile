@@ -23,12 +23,24 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
-                        // sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host= sonarqube'
+                        sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url= http://13.233.90.94:9000'
                     // withSonarQubeEnv('sonarqube') {
                         // sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Argo \
                         //    -Dsonar.java.binaries=. \
                         //    -Dsonar.projectKey=Argo '''
-                        sh ' mvn sonar:sonar '
+                        // sh ' mvn sonar:sonar '
+                    }
+                }
+            }
+        }
+        stage ('Build And Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-id-pass') {
+                    sh """ docker build -t image .
+                    docker tag  image maroofshaikh09/argocd-demo:$BUILD
+                    docker push   maroofshaikh09/argocd-demo:$BUILD
+                    """
                     }
                 }
             }
