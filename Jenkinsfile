@@ -11,5 +11,10 @@ pipeline {
                 sh "git clone https://github.com/maroof16/argo.git"
             }
         }
+        stage("Build and test") {
+            steps{
+                sh 'mvn clean package'
+            }
+        }
     }
 }
