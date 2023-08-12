@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Clean Workspace') {
             steps {
-                sh 'sudo rm -rf argo' // Clean the directory if it exists
+                sh 'sudo rm -rf *' // Clean the directory if it exists
             }
         }
         stage('git checkout') {
