@@ -19,7 +19,7 @@ pipeline {
         stage ("static code analysis") {
             steps {
                 withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
-                    sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url= http://13.233.90.94:9000'
+                    sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url= http://13.235.246.22:9000'
                 }
             }
         }
