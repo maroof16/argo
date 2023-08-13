@@ -7,7 +7,8 @@ pipeline {
     // }
     agent any
     tools {
-        maven'maven3'
+        maven 'maven3'
+        jdk 'jdk11'
     }
     stages {
         stage('git checkout') {
@@ -16,7 +17,7 @@ pipeline {
             }
         }
         stage("Build and test") {
-            steps{
+            steps {
                 sh 'mvn -X clean package'
             }
         }
@@ -41,3 +42,36 @@ pipeline {
         }
     }
 }
+// pipeline {
+//     agent any 
+    
+//     tools{
+//         jdk 'jdk11'
+//         maven 'maven3'
+//     }
+    
+//     environment {
+//         SCANNER_HOME=tool 'sonar-scanner'
+//     }
+    
+//     stages{
+        
+//         stage("Git Checkout"){
+//             steps{
+//                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/jaiswaladi246/Petclinic.git'
+//             }
+//         }
+        
+//         stage("Compile"){
+//             steps{
+//                 sh "mvn clean compile"
+//             }
+//         }
+        
+//          stage("Test Cases"){
+//             steps{
+//                 sh "mvn test"
+//             }
+//         }
+//     }
+// }
