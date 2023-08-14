@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
     SONAR_URL = "http://65.1.2.24:9000"
-    DOCKER_IMAGE = "maroofshaikh09/argo-icd:{BUILD_NUMBER}"
+    // DOCKER_IMAGE = "maroofshaikh09/argo-icd:{BUILD_NUMBER}"
     REGISTRY_CREDENTIALS = credentials("48330dad-59b2-41ac-838d-c67b8ad42f72")
     }
     stages {
@@ -31,10 +31,13 @@ pipeline {
         stage ('Build And Push') {
             steps {
                 script {
-                    sh ' docker build -t ${DOCKER_IMAGE} . '
-                    def dockerImage = docker.image{"${DOCKER_IMAGE}"}
-                    docker.withRegistry('https://index.docker.io/v1/',"${REGISTRY_CREDENTIALS}") {
-                    dockerImage.push()
+                    // sh ' docker build -t ${DOCKER_IMAGE} . '
+                    // def dockerImage = docker.image{"${DOCKER_IMAGE}"}
+                    // docker.withRegistry('https://index.docker.io/v1/',"${REGISTRY_CREDENTIALS}") {
+                    // dockerImage.push()
+                    def dockerImage = docker.build("maroofshaikh09/argo-icd:${env.BUILD_NUMBER}", ".")
+                    docker.withRegistry('https://index.docker.io/v1/', "${REGISTRY_CREDENTIALS}") {
+                        dockerImage.push()
                     }
                 }
             }
