@@ -29,7 +29,7 @@ pipeline {
         stage ('Build And Push') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker-id-pass') {
+                    withDockerRegistry(credentialsId: '48330dad-59b2-41ac-838d-c67b8ad42f72') {
                     sh """ docker build -t image .
                     docker tag  image maroofshaikh09/argocd-demo:$BUILD
                     docker push   maroofshaikh09/argocd-demo:$BUILD
