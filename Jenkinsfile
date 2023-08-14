@@ -6,9 +6,9 @@ pipeline {
         }
     }
     environment {
-    SONAR_URL = "http://65.1.2.24:9000"
+    SONAR_URL = "http://13.233.196.5:9000"
     // DOCKER_IMAGE = "maroofshaikh09/argo-icd:{BUILD_NUMBER}"
-    REGISTRY_CREDENTIALS = credentials("48330dad-59b2-41ac-838d-c67b8ad42f72")
+    REGISTRY_CREDENTIALS = credentials("docker-credential")
     }
     stages {
         stage('git checkout') {
