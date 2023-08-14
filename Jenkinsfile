@@ -8,7 +8,7 @@ pipeline {
     environment {
     SONAR_URL = "http://13.233.196.5:9000"
     // DOCKER_IMAGE = "maroofshaikh09/argo-icd:{BUILD_NUMBER}"
-    REGISTRY_CREDENTIALS = credentials("docker-credential")
+    // REGISTRY_CREDENTIALS = credentials("docker-credential")
     }
     stages {
         stage('git checkout') {
@@ -36,7 +36,7 @@ pipeline {
                     // docker.withRegistry('https://index.docker.io/v1/',"${REGISTRY_CREDENTIALS}") {
                     // dockerImage.push()
                     def dockerImage = docker.build("maroofshaikh09/argo-icd:${env.BUILD_NUMBER}", ".")
-                    docker.withRegistry('https://index.docker.io/v1/', "${REGISTRY_CREDENTIALS}") {
+                       withDockerRegistry(credentialsId: 'docker-credential') { 
                         dockerImage.push()
                     }
                 }
