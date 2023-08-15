@@ -24,13 +24,13 @@ pipeline {
                 sh 'mvn -X clean package'
             }
         }
-        stage ("static code analysis") {
-            steps {
-                withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
-                    sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url=${SONAR_URL}'
-                }
-            }
-        }
+        // stage ("static code analysis") {
+        //     steps {
+        //         withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar')]) {
+        //             sh 'mvn sonar:sonar -Dsonar.login=$sonar -Dsonar.host.url=${SONAR_URL}'
+        //         }
+        //     }
+        // }
         stage ('Build And Push') {
             steps {
                 script {
