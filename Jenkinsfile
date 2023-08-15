@@ -11,7 +11,7 @@ pipeline {
     // REGISTRY_CREDENTIALS = credentials("docker-credential")
     GIT_REPO_NAME = "argo"
     GIT_USER_NAME = "maroof16"
-    user_email  = "maroofshaikh09@gmail.com"
+    // user_email  = "maroofshaikh09@gmail.com"
     }
     stages {
         stage('git checkout') {
@@ -49,7 +49,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB')]) {
                     sh '''
-                        git config  user.email "${user_email}"
+                        git config  user.email "maroofshaikh09@gmail.com"
                         git config user.name "maroofshaikh"
                         BUILD_NUMBER=${BUILD_NUMBER}
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
