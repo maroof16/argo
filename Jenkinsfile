@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('git checkout') {
             steps {
-                git'https://https://github.com/maroof16/argo.git'
+                git 'https://https://github.com/maroof16/argo.git'
             }
         }
         stage("Build and test") {
