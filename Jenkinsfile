@@ -50,6 +50,7 @@ pipeline {
                 dir("${WORKSPACE}") {
                     withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB')]) {
                         sh '''
+                            git init
                             git config  user.email "maroofshaikh09@gmail.com"
                             git config user.name "maroofshaikh"
                             BUILD_NUMBER=${BUILD_NUMBER}
