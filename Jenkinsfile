@@ -47,17 +47,18 @@ pipeline {
         }
         stage('update Deployment File'){
             steps {
-                withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB')]) {
-                    sh '''
-                        git config  user.email "maroofshaikh09@gmail.com"
-                        git config user.name "maroofshaikh"
-                        BUILD_NUMBER=${BUILD_NUMBER}
-                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
-                        git add deployment.yml
-                        git commit --message="Update Image Tag to version ${BUILD_NUMBER}"
-                        git push https://${GITHUB}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
-
-                    '''
+                dir("${WORKSPACE}") {
+                    withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB')]) {
+                        sh '''
+                            git config  user.email "maroofshaikh09@gmail.com"
+                            git config user.name "maroofshaikh"
+                            BUILD_NUMBER=${BUILD_NUMBER}
+                            sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
+                            git add deployment.yml
+                            git commit --message="Update Image Tag to version ${BUILD_NUMBER}"
+                            git push https://${GITHUB}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                        '''
+                    }
                 }
             }   
         }
