@@ -6,14 +6,17 @@ pipeline {
         }
     }
     environment {
-    SONAR_URL = "http://13.233.196.5:9000"
+    SONAR_URL = "http://65.2.38.167:9000"
     // DOCKER_IMAGE = "maroofshaikh09/argo-icd:{BUILD_NUMBER}"
     // REGISTRY_CREDENTIALS = credentials("docker-credential")
+    GIT_REPO-NAME = "argo"
+    GIT_USER_NAME = "maroof16"
+    user_email  = "maroofshaikh09@gmail.com"
     }
     stages {
         stage('git checkout') {
             steps {
-                 git branch: 'main', url:'https://github.com/sahill20/java-maven-sonar-argocd-helm-k8s.git'
+                git'https://https://github.com/maroof16/argo.git'
             }
         }
         stage("Build and test") {
@@ -35,12 +38,27 @@ pipeline {
                     // def dockerImage = docker.image{"${DOCKER_IMAGE}"}
                     // docker.withRegistry('https://index.docker.io/v1/',"${REGISTRY_CREDENTIALS}") {
                     // dockerImage.push()
-                    def dockerImage = docker.build("maroofshaikh09/argo-icd:${env.BUILD_NUMBER}", ".")
+                    def dockerImage = docker.build("maroofshaikh09/argo-cicd:${env.BUILD_NUMBER}", ".")
                        withDockerRegistry(credentialsId: 'docker-credential') { 
                         dockerImage.push()
                     }
                 }
             }
+        }
+        stage('update Deployment File'){
+            steps {
+                withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB')]) {
+                    sh '''
+                        git config  user.email "${user_email}"
+                        git config user.name "maroofshaikh"
+                        BUILD_NUMBER=${BUILD_NUMBER}
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
+                        git add deployment.yml
+                        git commit --message="Update Image Tag to version ${BUILD_NUMBER}"
+                        git push https://${GITHUB}@github.com/${GIT_USER_NAME}/${GIT_USER_NAME} HEAD:main
+                    '''
+                }
+            }   
         }
     }
 }
