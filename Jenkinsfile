@@ -9,7 +9,7 @@ pipeline {
     SONAR_URL = "http://65.2.38.167:9000"
     // DOCKER_IMAGE = "maroofshaikh09/argo-icd:{BUILD_NUMBER}"
     // REGISTRY_CREDENTIALS = credentials("docker-credential")
-    GIT_REPO-NAME = "argo"
+    GIT_REPO_NAME = "argo"
     GIT_USER_NAME = "maroof16"
     user_email  = "maroofshaikh09@gmail.com"
     }
