@@ -47,10 +47,9 @@ pipeline {
         }
         stage('update Deployment File'){
             steps {
-                dir("${WORKSPACE}") {
                     withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB')]) {
                         sh '''
-                            git init
+                            echo "pwd"
                             git config  user.email "maroofshaikh09@gmail.com"
                             git config user.name "maroofshaikh"
                             BUILD_NUMBER=${BUILD_NUMBER}
@@ -59,7 +58,6 @@ pipeline {
                             git commit --message="Update Image Tag to version ${BUILD_NUMBER}"
                             git push https://${GITHUB}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                         '''
-                    }
                 }
             }   
         }
